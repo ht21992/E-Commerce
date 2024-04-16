@@ -71,5 +71,26 @@ def shop(request):
         "products": products,
         "active_category": active_category,
     }
-
     return render(request, "core/shop.html", context)
+
+
+def get_products(request):
+    active_category = request.GET.get("category", "")
+    query = request.GET.get("query", "")
+
+    products = Product.objects.all()
+    if active_category:
+        products = products.filter(category__slug=active_category)
+
+    if query:
+        products = products.filter(
+            Q(name__icontains=query) | Q(description__icontains=query)
+        )
+
+    context = {
+        "active_category": active_category,
+        "products": products,
+        "active_category": active_category,
+        "query": query,
+    }
+    return render(request, "core/shop/products_partials.html", context)
