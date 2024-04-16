@@ -1,0 +1,30 @@
+<!doctype html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>{% block title %}{% endblock %} | ModernInc Homes</title>
+    </head>
+
+    <body>
+        {% include './navbar.html' %}
+
+        <main style="min-height: 650px;">
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        {% include './footer.html' %}
+
+        <script src="https://unpkg.com/htmx.org@1.7.0"></script>
+        <script>
+            document.body.addEventListener("htmx:configRequest", (event) => {
+                event.detail.headers["X-CSRFTOKEN"] = "{{csrf_token}}";
+            });
+        </script>
+        {% block scripts %}
+        {% endblock %}
+    </body>
+</html>
