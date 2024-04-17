@@ -22,7 +22,7 @@ DJ_SECRET_KEY = os.getenv("DJ_SECRET_KEY", "")
 STRIPE_API_KEY_HIDDEN = os.getenv("STRIPE_API_KEY_HIDDEN", "")
 STRIPE_API_KEY_PUBLISHABLE = os.getenv("STRIPE_API_KEY_PUBLISHABLE", "")
 
-
+LOGOUT_REDIRECT_URL = "/"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 

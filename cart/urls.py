@@ -7,7 +7,6 @@ from cart.views import (
     hx_menu_cart,
     update_cart,
     hx_cart_total,
-
 )
 
 urlpatterns = [
