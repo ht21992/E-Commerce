@@ -1,3 +1,13 @@
 <strong>Name: </strong>{{ request.user.get_full_name }}<br>
 <strong>Username: </strong>{{ request.user.username }}<br>
 <strong>E-mail: </strong>{{ request.user.email }}<br>
+
+
+<script>
+    try{
+        document.getElementById("editAccountBtn").style.display = "block"
+    }
+    catch(TypeError){
+        // DO nothing
+    }
+</script>

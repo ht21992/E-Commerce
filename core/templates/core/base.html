@@ -24,6 +24,24 @@
                 event.detail.headers["X-CSRFTOKEN"] = "{{csrf_token}}";
             });
         </script>
+        <script>
+            document.addEventListener('htmx:afterRequest', function(evt) {
+
+            if (evt.detail.elt.classList.contains('hx-purchase-btn')){
+                if (evt.detail.successful){
+                    evt.detail.elt.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="#009B77" stroke="#009B77" viewBox="0 0 24 24" width="24px" height="24px"><path d="M9 19.4L3.3 13.7 4.7 12.3 9 16.6 20.3 5.3 21.7 6.7z"/></svg>'
+                    evt.detail.elt.style.cursor = "help"
+                    evt.detail.elt.setAttribute('title', 'added to cart!')
+                    evt.detail.elt.setAttribute('hx-get', '#')
+                }
+
+
+            }
+
+            return
+            // Put the JS code that you want to run here
+            });
+            </script>
         {% block scripts %}
         {% endblock %}
     </body>

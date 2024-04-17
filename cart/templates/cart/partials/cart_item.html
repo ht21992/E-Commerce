@@ -14,8 +14,8 @@
             <hr>
 
             <div class="quantity mt-6 flex items-center space-x-4">
-                <a 
-                    class="p-3 bg-gray-100"
+                <a
+                    class="p-3 bg-gray-100 cursor-pointer rounded-full"
                     hx-get="{% url 'update_cart' item.product.id 'decrement' %}"
                     hx-target="#cart-item-{{ item.product.id }}"
                     hx-swap="outerHTML"
@@ -23,8 +23,8 @@
                     -
                 </a>
                 <span>{{ item.quantity }}</span>
-                <a 
-                    class="p-3 bg-gray-100"
+                <a
+                    class="p-3 bg-gray-100 cursor-pointer rounded-full"
                     hx-get="{% url 'update_cart' item.product.id 'increment' %}"
                     hx-target="#cart-item-{{ item.product.id }}"
                     hx-swap="outerHTML"
