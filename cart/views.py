@@ -1,10 +1,9 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-
 from .cart import Cart
-
 from product.models import Product
+
 
 
 def add_to_cart(request, product_id):
@@ -12,13 +11,9 @@ def add_to_cart(request, product_id):
     cart.add(product_id)
     return render(request, "cart/partials/menu_cart.html")
 
-
 def cart(request):
     return render(request, "cart/cart.html")
 
-
-def success(request):
-    return render(request, "cart/success.html")
 
 
 def update_cart(request, product_id, action):

@@ -6,3 +6,9 @@
 {% for product in products %}
     {% include 'product/partials/product_list_item.html' %}
 {% endfor %}
+
+<div class="container w-1/2 p-4 mx-auto text-center ">
+    {% if products|length > 0 %}
+        {% include 'core/pagination/pagination.html' with objects=products divId="productsContainer"  pageName="products_page" %}
+    {% endif %}
+</div>

@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from product.models import Product, Category
 
 from .forms import SignUpForm
+from django.core.paginator import Paginator
 
 
 def frontpage(request):
@@ -46,15 +47,14 @@ def edit_myaccount(request):
         user.save()
         return redirect("myaccount")
     temp_name = request.GET.get("temp_name", "account_info")
-    print(temp_name)
     return render(request, f"core/account/{temp_name}.html")
 
 
 def shop(request):
     categories = Category.objects.all()
     products = Product.objects.all()
-
     active_category = request.GET.get("category", "")
+    products_page = request.GET.get("products_page", 1)
 
     if active_category:
         products = products.filter(category__slug=active_category)
@@ -66,6 +66,11 @@ def shop(request):
             Q(name__icontains=query) | Q(description__icontains=query)
         )
 
+    products_paginator = Paginator(
+        products,
+        10,
+    )
+    products = products_paginator.page(products_page)
     context = {
         "categories": categories,
         "products": products,
@@ -77,8 +82,9 @@ def shop(request):
 def get_products(request):
     active_category = request.GET.get("category", "")
     query = request.GET.get("query", "")
-
+    products_page = request.GET.get("products_page", 1)
     products = Product.objects.all()
+
     if active_category:
         products = products.filter(category__slug=active_category)
 
@@ -87,6 +93,11 @@ def get_products(request):
             Q(name__icontains=query) | Q(description__icontains=query)
         )
 
+    products_paginator = Paginator(
+        products,
+        10,
+    )
+    products = products_paginator.page(products_page)
     context = {
         "active_category": active_category,
         "products": products,
